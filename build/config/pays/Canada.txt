@@ -1,0 +1,8 @@
+Activate
+Binary
+Compare
+Datas received on the server
+Sending datas
+to the user based in
+Receiving datas
+Text

@@ -1,0 +1,8 @@
+Activer
+Binaire
+Comparer
+Données reçues sur le serveur
+Envoi des données
+au client basés en/au
+Réception des données
+Texte

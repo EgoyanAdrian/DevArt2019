@@ -1,0 +1,8 @@
+Aktivere
+Binær
+Sammenligne
+Data mottatt på serveren
+Sender data
+Til kunden basert i
+Mottak av data
+Tekst
