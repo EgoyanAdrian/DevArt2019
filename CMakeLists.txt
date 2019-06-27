@@ -7,8 +7,8 @@ set(HEADERS
 	include/conversion.hpp
 	include/genererNomPays.hpp
 	include/fonctionAleatoire.hpp
-	include/Interface.hpp
 	include/BoutonEnvoyer.hpp
+	include/Interface.hpp
 	include/Bouton.hpp
 	)
 
@@ -16,8 +16,8 @@ set(SOURCES
 	src/conversion.cpp
 	src/genererNomPays.cpp
 	src/fonctionAleatoire.cpp
-	src/Interface.cpp
 	src/BoutonEnvoyer.cpp
+	src/Interface.cpp
 	src/Bouton.cpp
 	src/main.cpp
 	)

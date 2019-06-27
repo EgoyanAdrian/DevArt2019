@@ -3,7 +3,7 @@
 #include <fonctionAleatoire.hpp>
 #include <Interface.hpp>
 #include <genererNomPays.hpp>
-#include <BoutonEnvoyer.hpp>
+
 #include <conversion.hpp>
 #include <Bouton.hpp>
 
@@ -15,8 +15,8 @@ int main() {
 	nbIP();
 	std::cout << IP() << std::endl;
 	std::cout << chance(5) << std::endl;
-	std::string pays = genererNomPays();
-    std::cout << pays << std::endl;
+	std::string pays ="France";
+    
     std::cout << convertirTaB("bonjour le monde") << std::endl;
     std::cout << convertirBaT("01100010011011110110111001101010011011110111010101110010001000000110110001100101001000000110110101101111011011100110010001100101") << std::endl;
     bool EnvoyisFirstPush=false; //permet de savoir si Envoyer a etais deja utiliser ou non
@@ -70,10 +70,11 @@ int main() {
         if(!EnvoyisFirstPush){
             Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font);
         }
-        //else{
-            //Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font);
-        //}
-        
+        else{
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font);
+        }
+
+
         window.display();
     }
 

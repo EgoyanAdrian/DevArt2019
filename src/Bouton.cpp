@@ -7,6 +7,7 @@ Bouton::Bouton(int _x, int _y, uint _largeur, uint _hauteur, std::string _texte,
 
 	this->setPosition(pos);
 	this->setSize(size);
+	this->setFillColor(sf::Color::Transparent);
 
 	texte.setPosition(pos);
 	texte.setCharacterSize(20);
