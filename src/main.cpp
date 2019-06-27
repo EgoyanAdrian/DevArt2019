@@ -2,12 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <fonctionAleatoire.hpp>
 #include <Interface.hpp>
+#include <genererNomPays.hpp>
 
 int main() {
 	std::cout << "Bonjour le mondedd !" << std::endl;
 	nbIP();
-	std::cout<<IP()<<std::endl;
-	std::cout<<chance(5)<<std::endl;
+	std::cout << IP() << std::endl;
+	std::cout << chance(5) << std::endl;
+    std::cout << genererNomPays() << std::endl;
 	
 
     
