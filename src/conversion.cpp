@@ -1,7 +1,7 @@
 #include <conversion.hpp>
 
 std::string convertirTaB(std::string texte) {
-	std::string bits = "";
+	std::string bits = "", bitsTemp = "";
 
 	// Parcours de chaque caractere dans le string
 	for (char& caractere : texte) {
@@ -9,10 +9,14 @@ std::string convertirTaB(std::string texte) {
 		{
 			// Si le caractere en bit vaut 1
   			if (((caractere >> i) & 1) == 1)
-  				bits += "1";
+  				bitsTemp += "1";
   			else
-  				bits += "0";
-		}	
+  				bitsTemp += "0";
+		}
+
+		reverse(bitsTemp.begin(), bitsTemp.end());
+		bits += bitsTemp;
+		bitsTemp = "";
 	}
 
 	return bits;
@@ -22,11 +26,16 @@ std::string convertirBaT(std::string bits) {
 	std::string texte = "";
 	std::string motBits = "";
 	char nbCaractere = 0;
-	for (char& caractere : texte) {
+	for (char& caractere : bits) {
 		motBits += caractere;
 		nbCaractere++;
 
-		if (nbCaractere == 8) {
+		if (nbCaractere >= 8) {
+			std::bitset<8> bitsMot(motBits);
+			nbCaractere = 0;
+			motBits = "";
+			unsigned long i = bitsMot.to_ulong(); 
+			texte += static_cast<unsigned char>( i );
 		}
 	}
 
