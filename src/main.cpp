@@ -4,16 +4,16 @@
 #include <Interface.hpp>
 #include <genererNomPays.hpp>
 #include <BoutonEnvoyer.hpp>
+#include <conversion.hpp>
 
 int main() {
 	std::cout << "Bonjour le mondedd !" << std::endl;
 	nbIP();
 	std::cout << IP() << std::endl;
 	std::cout << chance(5) << std::endl;
-    //std::cout << genererNomPays() << std::endl;
-	std::string pays=genererNomPays();
-    //std::string pays="Polynésie";
-    std::cout<<pays<<std::endl;
+	std::string pays = genererNomPays();
+    std::cout << pays << std::endl;
+    std::cout << convertirTaB("bonjour le monde") << std::endl;
 
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");

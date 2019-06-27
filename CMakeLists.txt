@@ -4,6 +4,7 @@ project(da)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 
 set(HEADERS
+	include/conversion.hpp
 	include/genererNomPays.hpp
 	include/fonctionAleatoire.hpp
 	include/Interface.hpp
@@ -11,11 +12,12 @@ set(HEADERS
 	)
 
 set(SOURCES
+	src/conversion.cpp
 	src/genererNomPays.cpp
 	src/fonctionAleatoire.cpp
 	src/Interface.cpp
-	src/main.cpp
 	src/BoutonEnvoyer.cpp
+	src/main.cpp
 	)
 
 include_directories(include/lib/SFML)
