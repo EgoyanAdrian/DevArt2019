@@ -36,6 +36,10 @@ int main() {
                 mouse_X = event.mouseMove.x;//coordonner X de la sourie
                 mouse_Y = event.mouseMove.y;//coordonner Y de la sourie
             }
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                isPush=true;
+                std::cout<<"isPush"<<std::endl;
+            }
         }
         window.clear(sf::Color::White);
         if(!EnvoyisFirstPush){

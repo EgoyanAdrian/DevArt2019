@@ -46,6 +46,8 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
     w.draw(planisphere);
 
     if(isover(BoutonEnvoyer,mouse_X,mouse_Y)&&isPush){
+        
+        std::cout<<"ok"<<std::endl;
         EnvoyerisFisrtPush=true;
         BoutEnvoyer(pays,w,size_X,size_Y,EnvoyerisFisrtPush,isPush,mouse_X,mouse_Y);
     }
@@ -55,5 +57,5 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
 bool isover(sf::RectangleShape &Rectangle,uint mouse_X,uint mouse_Y){
     sf::Vector2f pos=Rectangle.getPosition();
     sf::Vector2f size=Rectangle.getSize();
-    (((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
+    return(((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
 }
