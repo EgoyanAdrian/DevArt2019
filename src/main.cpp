@@ -26,6 +26,7 @@ int main() {
     // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen())
     {
+
         // on inspecte tous les évènements de la fenêtre qui ont été émis depuis la précédente itération
         sf::Event event;
         while (window.pollEvent(event))
@@ -39,8 +40,12 @@ int main() {
             }
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                 isPush=true;
-                std::cout<<"isPush"<<std::endl;
+
             }
+            if(event.type==sf::Event::MouseButtonReleased){
+                isPush=false;
+            }
+
         }
         window.clear(sf::Color::White);
         if(!EnvoyisFirstPush){
