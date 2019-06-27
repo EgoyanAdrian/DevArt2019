@@ -5,6 +5,7 @@
 #include <genererNomPays.hpp>
 #include <BoutonEnvoyer.hpp>
 #include <conversion.hpp>
+#include <Bouton.hpp>
 
 int main() {
 	uint BsizeX=800;
@@ -23,6 +24,13 @@ int main() {
     uint mouse_X;
     uint mouse_Y;
 
+    sf::Font font;
+    if (!font.loadFromFile("font.ttf"))
+    {
+        // erreur...
+    }
+
+    Bouton bonjur(10, 20, 50, 70, "Test", font);
     
     sf::RenderWindow window(sf::VideoMode(BsizeX, BsizeY), "My window");
 
@@ -48,24 +56,26 @@ int main() {
 
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                 isPush=true;
-
+                bonjur.setClicked(bonjur.isOver(mouse_X, mouse_Y));
             }
 
             if(event.type==sf::Event::MouseButtonReleased){
                 isPush=false;
+                bonjur.setClicked(false);
             }
 
         }
         window.clear(sf::Color::White);
         
-        if(!EnvoyisFirstPush){
+        /*if(!EnvoyisFirstPush){
             Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY);
         }
         else{
             Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY);
-        }
+        }*/
         
-        
+        window.draw(bonjur);
+        bonjur.upgrade(window);
         window.display();
     }
 

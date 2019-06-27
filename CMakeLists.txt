@@ -9,6 +9,7 @@ set(HEADERS
 	include/fonctionAleatoire.hpp
 	include/Interface.hpp
 	include/BoutonEnvoyer.hpp
+	include/Bouton.hpp
 	)
 
 set(SOURCES
@@ -17,6 +18,7 @@ set(SOURCES
 	src/fonctionAleatoire.cpp
 	src/Interface.cpp
 	src/BoutonEnvoyer.cpp
+	src/Bouton.cpp
 	src/main.cpp
 	)
 
