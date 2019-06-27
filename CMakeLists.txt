@@ -4,10 +4,12 @@ project(da)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 
 set(HEADERS
+	include/fonctionAleatoire.hpp
 	)
 
 set(SOURCES
 	src/main.cpp
+	src/fonctionAleatoire.cpp
 	)
 
 include_directories(include/lib/SFML)
