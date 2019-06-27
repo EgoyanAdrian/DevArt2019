@@ -24,6 +24,9 @@ int main() {
     uint mouse_X;
     uint mouse_Y;
 
+    bool Binaire1=false;
+    bool Binaire2=false;
+
     sf::Font font;
     if (!font.loadFromFile("font.ttf"))
     {
@@ -71,7 +74,7 @@ int main() {
             Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font);
         }
         else{
-            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font);
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2);
         }
 
 

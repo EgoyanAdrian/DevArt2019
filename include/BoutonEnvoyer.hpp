@@ -1,5 +1,8 @@
 #include <iostream>
 #include <Bouton.hpp>
 #include <genererNomPays.hpp>
+#include <fonctionAleatoire.hpp>
 #include <SFML/Graphics.hpp>
-void Mise_A_jour_Position(std::string &pays,sf::RenderWindow &w,uint size_X,uint size_Y,uint DiffX,uint diffY);
+void Mise_A_jour_Position(std::string &pays,sf::RenderWindow &w,uint DiffX,uint diffY);
+
+void Action_Console(std::string &pays,sf::Font &font);
