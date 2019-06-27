@@ -34,20 +34,27 @@ int main() {
             // évènement "fermeture demandée" : on ferme la fenêtre
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if(event.type == sf::Event::Resized)
+                window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
+
             if(event.type == sf::Event::MouseMoved) {
                 mouse_X = event.mouseMove.x;//coordonner X de la sourie
                 mouse_Y = event.mouseMove.y;//coordonner Y de la sourie
             }
+
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                 isPush=true;
 
             }
+
             if(event.type==sf::Event::MouseButtonReleased){
                 isPush=false;
             }
 
         }
         window.clear(sf::Color::White);
+        
         if(!EnvoyisFirstPush){
             Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays);
         }
