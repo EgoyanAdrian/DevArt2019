@@ -3,14 +3,17 @@
 #include <fonctionAleatoire.hpp>
 #include <Interface.hpp>
 #include <genererNomPays.hpp>
+#include <BoutonEnvoyer.hpp>
 
 int main() {
 	std::cout << "Bonjour le mondedd !" << std::endl;
 	nbIP();
 	std::cout << IP() << std::endl;
 	std::cout << chance(5) << std::endl;
-    std::cout << genererNomPays() << std::endl;
-	
+    //std::cout << genererNomPays() << std::endl;
+	std::string pays=genererNomPays();
+    //std::string pays="Polynésie";
+    std::cout<<pays<<std::endl;
 
     
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
@@ -28,7 +31,7 @@ int main() {
         }
         window.clear(sf::Color::White);
         Interface(window);
-        
+        Mise_A_jour_Position(pays,window,650,20);
         window.display();
     }
 

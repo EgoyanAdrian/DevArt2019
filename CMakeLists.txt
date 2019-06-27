@@ -7,6 +7,7 @@ set(HEADERS
 	include/genererNomPays.hpp
 	include/fonctionAleatoire.hpp
 	include/Interface.hpp
+	include/BoutonEnvoyer.hpp
 	)
 
 set(SOURCES
@@ -14,6 +15,7 @@ set(SOURCES
 	src/fonctionAleatoire.cpp
 	src/Interface.cpp
 	src/main.cpp
+	src/BoutonEnvoyer.cpp
 	)
 
 include_directories(include/lib/SFML)
