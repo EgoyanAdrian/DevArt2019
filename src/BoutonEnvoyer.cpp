@@ -26,5 +26,5 @@ void Mise_A_jour_Position(std::string pays,sf::RenderWindow &w,uint size_X,uint 
 }
 
 void BoutEnvoyer(std::string pays,sf::RenderWindow &w,uint size_X,uint size_Y,bool &EnvoyerisFisrtPush,bool isPush,uint mouse_X,uint mouse_Y){
-
+	Mise_A_jour_Position(genererNomPays(),w,size_X,size_Y);
 }

@@ -7,7 +7,10 @@
 #include <conversion.hpp>
 
 int main() {
-	std::cout << "Bonjour le mondedd !" << std::endl;
+	uint BsizeX=800;
+    uint BsizeY=600;
+
+    std::cout << "Bonjour le mondedd !" << std::endl;
 	nbIP();
 	std::cout << IP() << std::endl;
 	std::cout << chance(5) << std::endl;
@@ -21,7 +24,7 @@ int main() {
     uint mouse_Y;
 
     
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(BsizeX, BsizeY), "My window");
 
     // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen())
@@ -56,11 +59,11 @@ int main() {
         window.clear(sf::Color::White);
         
         if(!EnvoyisFirstPush){
-            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays);
+            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY);
         }
-        //else{
-        //    Interface2(w,mouse_X,mouse_Y,isPush,EnvoyisFirstPush);
-        //}
+        else{
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY);
+        }
         
         
         window.display();
