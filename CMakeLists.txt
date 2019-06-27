@@ -5,11 +5,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
 
 set(HEADERS
 	include/fonctionAleatoire.hpp
+	include/Interface.hpp
 	)
 
 set(SOURCES
 	src/main.cpp
 	src/fonctionAleatoire.cpp
+	src/Interface.cpp
 	)
 
 include_directories(include/lib/SFML)
