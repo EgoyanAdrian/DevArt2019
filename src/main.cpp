@@ -14,6 +14,7 @@ int main() {
 	std::string pays = genererNomPays();
     std::cout << pays << std::endl;
     std::cout << convertirTaB("bonjour le monde") << std::endl;
+    std::cout << convertirBaT("01100010011011110110111001101010011011110111010101110010001000000110110001100101001000000110110101101111011011100110010001100101") << std::endl;
     bool EnvoyisFirstPush=false; //permet de savoir si Envoyer a etais deja utiliser ou non
     bool isPush=false;
     uint mouse_X;
