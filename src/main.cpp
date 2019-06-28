@@ -3,7 +3,7 @@
 #include <fonctionAleatoire.hpp>
 #include <Interface.hpp>
 #include <genererNomPays.hpp>
-
+#include <ZoneTexte.hpp>
 #include <conversion.hpp>
 #include <Bouton.hpp>
 
@@ -12,8 +12,7 @@ int main() {
     uint BsizeY=600;
 
     std::cout << "Bonjour le mondedd !" << std::endl;
-	nbIP();
-	std::cout << IP() << std::endl;
+
 	std::cout << chance(5) << std::endl;
 	std::string pays ="France";
     
@@ -24,14 +23,29 @@ int main() {
     uint mouse_X;
     uint mouse_Y;
 
+    bool EnvoyerisAcitve=false;
+
     bool Binaire1=false;
     bool Binaire2=false;
+
+
+    std::string messagePays="Envoye du fichier en "+pays+"\n";
+    std::string ipadressdapart;
+    std::string ipAdressArriver;
+    std::string messagefichierenvo="Fichier bien envoyer \n";
+    std::string messagefichierrec="Fichier bien recu\n";
+  
 
     sf::Font font;
     if (!font.loadFromFile("font.ttf"))
     {
         // erreur...
     }
+
+    ZoneTexte cmd(0,0,0,0,font);
+    //cmd.setLimitless(true);
+    ZoneTexte zText1(0,0,0,0,font);
+    ZoneTexte zText2(0,0,0,0,font);
 
     //Bouton (10, 20, 50, 70, "Test", font);
     
@@ -71,12 +85,59 @@ int main() {
         window.clear(sf::Color::White);
         
         if(!EnvoyisFirstPush){
-            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font);
+            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve);
         }
         else{
-            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2);
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve);
         }
 
+        if(EnvoyerisAcitve){
+            uint nbIP1=nbIP();
+            uint nbIP2=nbIP();
+            bool Affiche=false;
+            std::string TIP1[8];
+            std::string TIP2[8];
+            TIP1[0]=IPp();
+            for(int i=1;i<nbIP1;i++)
+                TIP1[i]=IP();
+            std::string ip=IP();
+            TIP2[0]=ip;
+            TIP1[nbIP1]=ip;
+            for(int i=1;i<nbIP2+1;i++)
+                TIP2[i]=IP();
+
+            TIP2[nbIP2]=IPp();
+            uint timeIPE=(20/nbIP1);
+            uint timeIPR=(20/nbIP2);
+            unsigned tmax = timeIPE; 
+            for(int i=1;i<nbIP1+1;i++){
+                ipadressdapart="Envoye en cours de " +TIP1[i-1] +" a "+TIP1[i]+"\n";//creer le message
+                for(char & caractere : ipadressdapart) {
+                cmd.setTexte(caractere);
+                }
+            }
+
+            for(char & caractere : messagefichierenvo) {
+                cmd.setTexte(caractere);
+            }
+        
+            for(char & caractere : messagePays) {
+                cmd.setTexte(caractere);
+            }
+            for(int i=0;i<nbIP2;i++){
+            ipadressdapart+"Envoye en cours de " +TIP2[i] +" à "+TIP2[i+1]+"\n";
+                for(char & caractere : ipadressdapart) {
+                cmd.setTexte(caractere);
+                }
+
+            }
+            for(char & caractere : messagefichierrec) {
+                cmd.setTexte(caractere);
+            }
+            EnvoyerisAcitve=false;
+        }
+        cmd.upgrade(window);
+        window.draw(cmd);
 
         window.display();
     }

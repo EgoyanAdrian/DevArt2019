@@ -2,8 +2,8 @@
 #include <iostream>
 #include <BoutonEnvoyer.hpp>
 
-void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font){
-    //recupere les dimentions de l'écran
+void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve){
+   //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
     uint diffY=dimeEcran.y-BsizeY;
@@ -36,14 +36,9 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
     BoutonEnvoyer.upgrade(w);
     w.draw(BoutonEnvoyer);
 
-    //deffini le bouton envoyer
-	/*sf::RectangleShape BoutonEnvoyer(sf::Vector2f(120.f+diffX,50.f+diffY)); 
-	BoutonEnvoyer.setOutlineColor(sf::Color::Black);
-    BoutonEnvoyer.setOutlineThickness(3);
-	BoutonEnvoyer.setPosition(650+diffX, 500+diffY);*/
 
 	//affiche les deux fenetres
-    w.draw(Rectangle1);
+   w.draw(Rectangle1);
     w.draw(Rectangle2);
 
     //affichage du CMD
@@ -51,11 +46,9 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
     uint Rpy=200+diffY/2;
     uint size_X=10+250.f+DiffX+30+250.f+DiffX+30;
     uint size_Y=20+100+diffY/2+20;
-    sf::RectangleShape console(sf::Vector2f(Rpx,Rpy));
-    console.setFillColor(sf::Color::Black);
-    console.setOutlineThickness(3);
-    console.setPosition(size_X,size_Y);
-    w.draw(console);
+
+    ZT.setSize(sf::Vector2f(Rpx,Rpy));
+    ZT.setPosition(size_X,size_Y);
 
     uint CMD_lign_X=size_X;
     uint CMD_lign_Y=size_Y;
@@ -66,7 +59,7 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
             if(BoutonEnvoyer.getClicked()){
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
-                Action_Console(pays,font,w,CMD_lign_X,CMD_lign_Y);
+                EnvoyerisAcitve=true;
             }
     }
     else
@@ -80,7 +73,7 @@ bool isover(sf::RectangleShape &Rectangle,uint mouse_X,uint mouse_Y){
     return(((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
 }
 
-void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2){
+void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve){
     //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -188,20 +181,18 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     uint Rpy=200+diffY/2;
     uint size_X=10+250.f+DiffX+30+250.f+DiffX+30;
     uint size_Y=20+100+diffY/2+20;
-    sf::RectangleShape console(sf::Vector2f(Rpx,Rpy));
-    console.setFillColor(sf::Color::Black);
-    console.setOutlineThickness(3);
-    console.setPosition(size_X,size_Y);
-    w.draw(console);
+    ZT.setSize(sf::Vector2f(Rpx,Rpy));
+    ZT.setPosition(size_X,size_Y);
 
     Mise_A_jour_Position(pays,w,DiffX,diffY);    
     
     if(isPush){
         BoutonEnvoyer.setClicked(BoutonEnvoyer.isOver(mouse_X, mouse_Y));
             if(BoutonEnvoyer.getClicked()){
+                std::cout<<"ok"<<std::endl;
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
-                //Action_Console(pays,font,w,CMD_lign_X,CMD_lign_Y);
+                EnvoyerisAcitve=true;
             }
     }
 }

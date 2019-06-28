@@ -9,6 +9,7 @@ set(HEADERS
 	include/fonctionAleatoire.hpp
 	include/BoutonEnvoyer.hpp
 	include/Interface.hpp
+	include/ZoneTexte.hpp
 	include/Bouton.hpp
 	)
 
@@ -19,6 +20,7 @@ set(SOURCES
 	src/BoutonEnvoyer.cpp
 	src/Interface.cpp
 	src/Bouton.cpp
+	src/ZoneTexte.cpp
 	src/main.cpp
 	)
 
