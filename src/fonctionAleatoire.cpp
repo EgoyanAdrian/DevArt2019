@@ -60,7 +60,9 @@ bool chance(int max){
 std::string corruption(std::string _texte,std::string &corruptionValue) {
 	srand(time(0));
 	int val;
+	std::cout<<_texte<<std::endl;
 	corruptionValue="";
+	std::cout<<corruptionValue<<std::endl;
 	std::string texteTempo = "";
 	for(char & caractere : _texte) {
 		val = rand()%9 + 1;
@@ -76,10 +78,15 @@ std::string corruption(std::string _texte,std::string &corruptionValue) {
 			texteTempo = texteTempo;
 			corruptionValue+="9";
 		}
-		else
+		else{
 			texteTempo += caractere;
 			corruptionValue+="0";
-	}
+		}
 
+	std::cout<<val<<std::endl;
+	std::cout<<corruptionValue<<std::endl;
+	}
+	std::cout<<"je sort"<<std::endl;
+	std::cout<<corruptionValue<<std::endl;
 	return texteTempo;
 }
