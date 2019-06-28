@@ -6,6 +6,7 @@ ZoneTexte::ZoneTexte(int _x, int _y, uint _largeur, uint _hauteur, sf::Font & fo
 
 	this->setPosition(pos);
 	this->setSize(size);
+	this->setFillColor(sf::Color::Transparent);
 
 	texteArea.setFont(font);
 	texteArea.setFillColor(sf::Color::Black);
