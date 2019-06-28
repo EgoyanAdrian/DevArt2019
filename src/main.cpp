@@ -30,6 +30,7 @@ int main() {
 
     char lettre;
     std::string motBinaire;
+    bool isShiftPressed;
 
     std::string messagePays;
     std::string ipadressdapart;
@@ -86,14 +87,10 @@ int main() {
             }
 
             if(event.type == sf::Event::KeyPressed) {
-                switch(event.key.code) {
-                    case sf::Keyboard::A:
-                            lettre = 'a';
-                        break;
-                    default:
-                            lettre = '\n';
-                        break;
-                }
+                if((event.key.code == sf::Keyboard::LShift) || (event.key.code == sf::Keyboard::RShift))
+                    isShiftPressed = true;
+
+                lettre = lettreKey(event, isShiftPressed);
 
                 if(!EnvoyisFirstPush) {
                     if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull()) && (!zText2.isFull())) {
@@ -113,6 +110,10 @@ int main() {
                 }
             }
 
+            if(event.type == sf::Event::KeyReleased) {
+                if((event.key.code == sf::Keyboard::LShift) || (event.key.code == sf::Keyboard::RShift))
+                    isShiftPressed = false;
+            }
         }
         window.clear(sf::Color::White);
         
