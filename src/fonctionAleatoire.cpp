@@ -83,3 +83,51 @@ std::string corruption(std::string _texte,std::string &corruptionValue) {
 	}
 	return texteTempo;
 }
+
+void hacking(ZoneTexte & ZT2) {
+	std::string zt2String;
+	std::string zt2Tempo;
+	uint nbChar = 0;
+	uint posAct = 0;
+	uint pos;
+
+	if(ZT2.getBinaire()) {
+		zt2String = ZT2.getTexte();
+	} else {
+		zt2String = convertirTaB(ZT2.getTexte());
+	}
+
+	std::cout << zt2String << std::endl;
+
+	for(char & caractere : zt2String) {
+		nbChar++;
+	}
+
+	srand(time(0));
+	pos = rand()%nbChar + 1;
+
+	for(char & caractere : zt2String) {
+		if(posAct == pos) {
+			if(caractere == '0')
+				zt2Tempo += '1';
+			else if(caractere == '1')
+				zt2Tempo += '0';
+		} else {
+			zt2Tempo += caractere;
+		}
+		posAct++;
+	}
+	std::cout << zt2Tempo << std::endl;
+	ZT2.clear();
+	if(ZT2.getBinaire()) {
+		for(char & caractere : zt2Tempo)
+			ZT2.setTexte(caractere);
+	} else {
+		zt2Tempo = convertirBaT(zt2Tempo);
+		for(char & caractere : zt2Tempo)
+			ZT2.setTexte(caractere);
+	}
+
+
+	return;
+}
