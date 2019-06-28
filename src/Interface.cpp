@@ -2,7 +2,7 @@
 #include <iostream>
 #include <BoutonEnvoyer.hpp>
 
-void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve){
+void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup){
    //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -58,6 +58,10 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
+                if(chance){
+                    corruption(ZT1.getTexte(),corrup);
+
+                }
             }
     }
     else
@@ -71,13 +75,19 @@ bool isover(sf::RectangleShape &Rectangle,uint mouse_X,uint mouse_Y){
     return(((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
 }
 
-void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve){
+void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup){
     //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
     uint diffY=dimeEcran.y-BsizeY;
 
-    
+    std::string motBinaire1;
+    std::string motBinaire2;
+
+    std::string motcharac1;
+    std::string motcharac2;
+
+
     uint DiffX;
     DiffX=diffX/3;
 
@@ -131,11 +141,18 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         if(TB1.getClicked()){
         std::cout<<"tb1 ok"<<std::endl;
             if(!Binaire1){
-                std::cout<<"affiche du binaire"<<std::endl;
+                motBinaire1 = convertirTaB(ZT1.getTexte());
+                ZT1.clear();
+                for(char & caractere : motBinaire1) {
+                    ZT1.setTexte(caractere);
+                }
                 Binaire1=true;
             }
             else{
-                std::cout<<"affiche du texte"<<std::endl;
+                //motcharac1=convertirBaT(ZT1.getTexte());
+                for(char & caractere : motcharac1){
+                    ZT1.setTexte(caractere);
+                }
                 Binaire1=false;
             }
         }
@@ -150,7 +167,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         if(TB2.getClicked()){
         std::cout<<"tb2 ok"<<std::endl;
             if(!Binaire2){
-                std::cout<<"affiche du binaire"<<std::endl;
+                
                 Binaire2=true;
             }
             else{
@@ -183,6 +200,9 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
+                if(chance){
+                    corruption(ZT1.getTexte(),corrup);
+                }
             }
     }
 }

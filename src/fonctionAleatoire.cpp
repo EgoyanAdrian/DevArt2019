@@ -57,7 +57,7 @@ bool chance(int max){
 	return(1==valeur);
 }
 
-std::string corruption(std::string _texte) {
+std::string corruption(std::string _texte,bool &corruption) {
 	srand(time(0));
 	int val;
 	std::string texteTempo = "";

@@ -23,6 +23,7 @@ int main() {
     uint mouse_X;
     uint mouse_Y;
 
+    bool corruption=false;
     bool EnvoyerisAcitve=false;
 
     bool Binaire1=false;
@@ -117,10 +118,10 @@ int main() {
         window.clear(sf::Color::White);
         
         if(!EnvoyisFirstPush){
-            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve);
+            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve,corruption);
         }
         else{
-            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve);
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corruption);
         }
 
         if(EnvoyerisAcitve){
