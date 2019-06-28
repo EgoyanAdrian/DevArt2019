@@ -58,6 +58,17 @@ void ZoneTexte::setTexte(char lettre) {
 	texteTemp += lettre;
 	nbCar++;
 	texteArea.setString(texteCourant + texteTemp);
+	if(isClicked) {posCurseur = nbCar;}
+}
+
+int ZoneTexte::getCurseur() const {
+	return posCurseur;
+}
+
+void ZoneTexte::setCurseur(int _posCurseur) {
+	std::string texteTempo = texteArea.getString();
+	if((_posCurseur >= 0) && (_posCurseur <= texteTempo.length()))
+		posCurseur = _posCurseur;
 }
 
 void ZoneTexte::clear() {
@@ -65,10 +76,24 @@ void ZoneTexte::clear() {
 }
 
 void ZoneTexte::remove() {
-	std::string texteTempo;
+	std::string texteTempo, texteRetour;
 	texteTempo = texteArea.getString();
-	texteTempo = texteTempo.substr(0, texteTempo.length() - 1);
-	texteArea.setString(texteTempo);
+	
+	if(texteTempo.length() > 0) {
+		if(posCurseur == 0) {
+			texteRetour = texteTempo.substr(1, texteTempo.length());
+		} else if(posCurseur == texteTempo.length()) {
+			texteRetour = texteTempo.substr(0, texteTempo.length() - 1);
+			posCurseur = texteTempo.length() - 1;
+		} else {
+			texteRetour = texteTempo.substr(0, posCurseur);
+			texteRetour += texteTempo.substr(posCurseur + 1, texteTempo.length());
+		}
+
+		nbCar--;
+	}
+	
+	texteArea.setString(texteRetour);
 }
 
 bool ZoneTexte::isOver(int _x, int _y) const {

@@ -7,6 +7,7 @@
 class ZoneTexte : public sf::RectangleShape {
 	sf::Text texteArea;
 	int nbCar = 0;
+	int posCurseur = 0;
 	bool isClicked = false;
 	bool isLimitless = false;
 
@@ -22,6 +23,9 @@ class ZoneTexte : public sf::RectangleShape {
 
 		std::string getTexte() const;
 		void setTexte(char lettre);
+
+		int getCurseur() const;
+		void setCurseur(int _posCurseur);
 
 		void clear();
 		void remove();
