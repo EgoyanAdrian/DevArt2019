@@ -28,6 +28,8 @@ int main() {
     bool Binaire1=false;
     bool Binaire2=false;
 
+    char lettre;
+    std::string motBinaire;
 
     std::string messagePays;
     std::string ipadressdapart;
@@ -73,12 +75,41 @@ int main() {
 
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                 isPush=true;
-                
+                zText1.setClicked(zText1.isOver(mouse_X, mouse_Y));
+                if(EnvoyisFirstPush)
+                    zText2.setClicked(zText2.isOver(mouse_X, mouse_Y));
             }
 
             if(event.type==sf::Event::MouseButtonReleased){
                 isPush=false;
                 
+            }
+
+            if(event.type == sf::Event::KeyPressed) {
+                switch(event.key.code) {
+                    case sf::Keyboard::A:
+                            lettre = 'a';
+                        break;
+                    default:
+                            lettre = '\n';
+                        break;
+                }
+
+                if(!EnvoyisFirstPush) {
+                    if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull()) && (!zText2.isFull())) {
+                        zText1.setTexte(lettre);
+                        motBinaire = convertirTaB(zText1.getTexte());
+                        for(char & caractere : motBinaire) {
+                            zText2.setTexte(caractere);
+                        }
+                    }
+                } else {
+                    if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull())) {
+                        zText1.setTexte(lettre);
+                    } else if((zText2.getClicked()) && (lettre != '\n') && (!zText2.isFull())) {
+                        zText2.setTexte(lettre);
+                    }
+                }
             }
 
         }
