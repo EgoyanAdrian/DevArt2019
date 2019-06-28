@@ -65,7 +65,7 @@ void Mise_A_jour_Position(std::string &pays,sf::RenderWindow &w,uint DiffX,uint 
 		planisphere.setTexture(&Textureplanisphere);
     	w.draw(planisphere);
 	}
-	else if(pays=="Norvége"){
+	else if(pays=="Norvege"){
 		sf::Texture Textureplanisphere;
 
     	if(!Textureplanisphere.loadFromFile("planisphereNv.png"))
@@ -105,7 +105,7 @@ void Mise_A_jour_Position(std::string &pays,sf::RenderWindow &w,uint DiffX,uint 
 		planisphere.setTexture(&Textureplanisphere);
     	w.draw(planisphere);
 	}
-	else if(pays=="Polynésie"){
+	else if(pays=="Polynesie"){
 	
 		sf::Texture Textureplanisphere;
 
