@@ -30,11 +30,15 @@ std::string convertirBaT(std::string bits) {
 
 	// Parcours de chaque caractere
 	for (char& caractere : bits) {
-		motBits += caractere;
-		nbCaractere++;
+        std::cerr << caractere << std::endl;
+        if(caractere != '\n') {
+            motBits += caractere;
+            nbCaractere++;
+        }
 
 		// Si il y a 8 caractere alors une suite de bits
 		if (nbCaractere >= 8) {
+            std::cout << motBits << std::endl;
 			std::bitset<8> bitsMot(motBits);
 			nbCaractere = 0;
 			motBits = "";
