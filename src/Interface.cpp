@@ -2,7 +2,7 @@
 #include <iostream>
 #include <BoutonEnvoyer.hpp>
 
-void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup){
+void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush){
    //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -52,17 +52,19 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
     uint CMD_lign_Y=size_Y;
     Mise_A_jour_Position(pays,w,DiffX,diffY);
 
-    if(isPush){
+    if(isPush&&(!isAlreadyPush)){
         BoutonEnvoyer.setClicked(BoutonEnvoyer.isOver(mouse_X, mouse_Y));
             if(BoutonEnvoyer.getClicked()){
+                isAlreadyPush=true;
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
-                if(chance){
+                if(chance(10)){
                     corruption(ZT1.getTexte(),corrup);
 
                 }
             }
+        isPush=false;
     }
     else
         BoutonEnvoyer.setClicked(false);
@@ -75,7 +77,7 @@ bool isover(sf::RectangleShape &Rectangle,uint mouse_X,uint mouse_Y){
     return(((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
 }
 
-void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup){
+void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush,bool &isAlreadyPushTB1,bool &isAlreadyPushTB2){
     //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -136,9 +138,10 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     TB2.upgrade(w);
     w.draw(TB2);
 
-    if(isPush){
+    if(isPush&&(!isAlreadyPushTB1)){
         TB1.setClicked(TB1.isOver(mouse_X, mouse_Y));
         if(TB1.getClicked()){
+        isAlreadyPushTB1=true;
         std::cout<<"tb1 ok"<<std::endl;
             if(!Binaire1){
                 motBinaire1 = convertirTaB(ZT1.getTexte());
@@ -149,7 +152,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 Binaire1=true;
             }
             else{
-                //motcharac1=convertirBaT(ZT1.getTexte());
+                motcharac1=convertirBaT(ZT1.getTexte());
                 for(char & caractere : motcharac1){
                     ZT1.setTexte(caractere);
                 }
@@ -162,9 +165,10 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     }
     
 
-    if(isPush){
+    if(isPush&&(!isAlreadyPushTB2)){
         TB2.setClicked(TB2.isOver(mouse_X, mouse_Y));
         if(TB2.getClicked()){
+            isAlreadyPushTB2=true;
         std::cout<<"tb2 ok"<<std::endl;
             if(!Binaire2){
                 
@@ -194,16 +198,18 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
 
     Mise_A_jour_Position(pays,w,DiffX,diffY);    
     
-    if(isPush){
+    if(isPush&&(!isAlreadyPush)){
         BoutonEnvoyer.setClicked(BoutonEnvoyer.isOver(mouse_X, mouse_Y));
             if(BoutonEnvoyer.getClicked()){
+                isAlreadyPush=false;
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
-                if(chance){
+                if(chance(10)){
                     corruption(ZT1.getTexte(),corrup);
                 }
             }
+        isPush=false;
     }
 }
     

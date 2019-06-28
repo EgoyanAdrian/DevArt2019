@@ -65,12 +65,18 @@ std::string corruption(std::string _texte,bool &corruption) {
 	for(char & caractere : _texte) {
 		val = rand()%9 + 1;
 		
-		if(val == 2)
+		if(val == 2){
 			texteTempo += '0';
-		else if(val == 6)
+			corruption=true;
+		}
+		else if(val == 6){
 			texteTempo += '1';
-		else if(val == 9)
+			corruption=true;
+		}
+		else if(val == 9){
 			texteTempo = texteTempo;
+			corruption=true;
+		}
 		else
 			texteTempo += caractere;
 	}

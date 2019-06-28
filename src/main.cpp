@@ -15,17 +15,19 @@ int main() {
 
 	std::cout << chance(5) << std::endl;
 	std::string pays ="France";
-    
+    bool corrupti=false;
     std::cout << convertirTaB("bonjour le monde") << std::endl;
     std::cout << convertirBaT("01100010011011110110111001101010011011110111010101110010001000000110110001100101001000000110110101101111011011100110010001100101") << std::endl;
+    //std::cout<<corruption("01100010011011110110111001101010011011110111010101110010001000000110110001100101001000000110110101101111011011100110010001100101",corrupti)<<std::endl;
     bool EnvoyisFirstPush=false; //permet de savoir si Envoyer a etais deja utiliser ou non
     bool isPush=false;
     uint mouse_X;
     uint mouse_Y;
-
-    bool corruption=false;
+    bool isAlreadyPush=false;
+  
     bool EnvoyerisAcitve=false;
-
+    bool isAlreadyPushTB1=false;
+    bool isAlreadyPushTB2=false;
     bool Binaire1=false;
     bool Binaire2=false;
 
@@ -33,6 +35,7 @@ int main() {
     std::string motBinaire;
     bool isShiftPressed;
 
+    std::string CorruptiondesDonne;
     std::string messagePays;
     std::string ipadressdapart;
     std::string ipAdressArriver;
@@ -77,6 +80,9 @@ int main() {
 
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                 isPush=true;
+                isAlreadyPush=false;
+                isAlreadyPushTB1=false;
+                isAlreadyPushTB2=false;
                 zText1.setClicked(zText1.isOver(mouse_X, mouse_Y));
                 if(EnvoyisFirstPush)
                     zText2.setClicked(zText2.isOver(mouse_X, mouse_Y));
@@ -119,10 +125,10 @@ int main() {
         window.clear(sf::Color::White);
         
         if(!EnvoyisFirstPush){
-            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve,corruption);
+            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush);
         }
         else{
-            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corruption);
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,isAlreadyPushTB1,isAlreadyPushTB2);
         }
 
         if(EnvoyerisAcitve){
@@ -169,6 +175,13 @@ int main() {
                 cmd.setTexte(caractere);
             }
             EnvoyerisAcitve=false;
+        }
+        if(corrupti){
+            CorruptiondesDonne="Attention fichier corrompue\n";
+            for(char & caractere : CorruptiondesDonne) {
+                cmd.setTexte(caractere);
+            }
+            corrupti=false;  
         }
         cmd.upgrade(window);
         window.draw(cmd);
