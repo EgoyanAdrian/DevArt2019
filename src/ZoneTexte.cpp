@@ -11,7 +11,7 @@ ZoneTexte::ZoneTexte(int _x, int _y, uint _largeur, uint _hauteur, sf::Font & fo
 	texteArea.setFont(font);
 	texteArea.setFillColor(sf::Color::Black);
 	texteArea.setPosition(pos);
-	texteArea.setCharacterSize(10);
+	texteArea.setCharacterSize(18);
 }
 
 ZoneTexte::~ZoneTexte() 
@@ -48,7 +48,7 @@ void ZoneTexte::setTexte(char lettre) {
 	std::string texteTemp = "", texteCourant = texteArea.getString();
 	sf::Vector2f size(this->getSize());
 	sf::FloatRect _textAreaSize = texteArea.getGlobalBounds();
-	int maxChar = (size.x / texteArea.getCharacterSize());
+	int maxChar = (size.x / texteArea.getCharacterSize()) + 10;
 
 	if((!isBinaire) || (isBinaire && ((lettre == '0') || (lettre == '1')))) {
 		if((isLimitless) && (_textAreaSize.height >= size.y)) {

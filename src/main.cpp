@@ -58,7 +58,7 @@ int main() {
 
     //Bouton (10, 20, 50, 70, "Test", font);
     
-    sf::RenderWindow window(sf::VideoMode(BsizeX, BsizeY), "My window");
+    sf::RenderWindow window(sf::VideoMode(BsizeX, BsizeY), "Data Simulator");
 
     // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen())

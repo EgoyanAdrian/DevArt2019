@@ -199,7 +199,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
 
     uint RBCx=132;
     uint RBCy=30;
-    Bouton BoutonComp(10+R1x+30+R2x+30,460+diffY,RBCx,RBCy,"Comparaison",font,false);
+    Bouton BoutonComp(10+R1x+30+R2x+30,460+diffY,RBCx,RBCy,"Comparer",font,false);
 
     
 
@@ -258,7 +258,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                     }
                     ZT2.upgrade(w);
                     w.draw(ZT2);
-                } else if(chance(10)) {
+                } else if(chance(5)) {
                     isHacking = toujHacking = true;
                     hacking(ZT2);
                 }
@@ -290,10 +290,10 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
 }
 
 void compareCorronp(std::string orrig,std::string corrom,std::string &indiceCor,ZoneTexte &AideCorrom,sf::RenderWindow &w,Bouton &BoutCompa,sf::RectangleShape &SousAideeCorrom,uint mouse_X,uint mouse_Y,bool &isAlreadyPushBC,bool &isPush,bool &tjourCorr){
-    std::string message="Attention des donnees on etais corrompu\nVoici comment les recuperes";
-    std::string Aidee="Les 0 signifie de le bytes (0 ou 1) non pas changes, les 2 signifie que les bytes ont etais change par des 0\nles 6 signifie que les bytes on etais change en 1 et\n le 9 signifie que les bytes on etais change pas des 0 ou des 1";
-    std::string liste="Les modifications doivent etre apporter sur la fenetre en rouge\nvoici votre aide: "+indiceCor+"\n";
-    std::string consig="effectuer les modifications puis clicke sur 'Comparaison'";
+    std::string message="Attention des donnees ont etes corrompues Voici comment les recuperer";
+    std::string Aidee="Les 0 signifie que les bits (0 ou 1) ne sont pas changes, les 2 signifie que les bits ont ete changes par des 0, les 6 signifie que les bits ont ete changes en 1 et le 9 signifie que les bits ont etes changes par des 0 ou des 1";
+    std::string liste="Les modifications doivent etre apporte sur la fenetre de droite voici votre aide: " + indiceCor;
+    std::string consig="effectuer les modifications puis clicke sur 'Comparer'";
     
     
 
@@ -311,15 +311,6 @@ void compareCorronp(std::string orrig,std::string corrom,std::string &indiceCor,
     }
     AideCorrom.upgrade(w);
     w.draw(AideCorrom);
-
-    if(tjourCorr){
-        std::string liste="Le probleme n'est pas resolute voici l'aide avec les modification trouver\n"+indiceCor+"\n";
-        for(char & caractere : liste){
-            AideCorrom.setTexte(caractere);
-        }
-        AideCorrom.upgrade(w);
-        w.draw(AideCorrom);
-    }
 
     if(isPush&&(!isAlreadyPushBC)){
         
