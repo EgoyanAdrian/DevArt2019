@@ -1,7 +1,3 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <sstream>
 #include <fonctionAleatoire.hpp>
 
 int nbIP(){
@@ -59,4 +55,29 @@ std::string IPp(){
 bool chance(int max){
 	int valeur=rand()%max+1;
 	return(1==valeur);
+}
+
+std::string corruption(std::string _texte) {
+	srand(time(0));
+	int val;
+	std::string texteTempo = "";
+
+	for(char & caractere : _texte) {
+		val = rand()%9 + 1;
+		
+		if(val == 2)
+			texteTempo += '0';
+		else if(val == 6)
+			texteTempo += '1';
+		else if(val == 9)
+			texteTempo = texteTempo;
+		else
+			texteTempo += caractere;
+
+		std::cout << val;
+	}
+
+	std::cout << std::endl;
+	std::cout << texteTempo << std::endl;
+	return texteTempo;
 }
