@@ -13,12 +13,9 @@ int main() {
 
     std::cout << "Bonjour le mondedd !" << std::endl;
 
-	std::cout << chance(5) << std::endl;
 	std::string pays ="France";
     bool corrupti=false;
-    std::cout << convertirTaB("bonjour le monde") << std::endl;
-    std::cout << convertirBaT("01100010011011110110111001101010011011110111010101110010001000000110110001100101001000000110110101101111011011100110010001100101") << std::endl;
-    //std::cout<<corruption("01100010011011110110111001101010011011110111010101110010001000000110110001100101001000000110110101101111011011100110010001100101",corrupti)<<std::endl;
+
     bool EnvoyisFirstPush=false; //permet de savoir si Envoyer a etais deja utiliser ou non
     bool isPush=false;
     uint mouse_X;
@@ -29,7 +26,7 @@ int main() {
     bool isAlreadyPushTB1=false;
     bool isAlreadyPushTB2=false;
     bool Binaire1=false;
-    bool Binaire2=false;
+    bool Binaire2=true;
 
     char lettre;
     std::string motBinaire;

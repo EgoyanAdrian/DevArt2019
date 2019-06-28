@@ -142,7 +142,6 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         TB1.setClicked(TB1.isOver(mouse_X, mouse_Y));
         if(TB1.getClicked()){
         isAlreadyPushTB1=true;
-        std::cout<<"tb1 ok"<<std::endl;
             if(!Binaire1){
                 motBinaire1 = convertirTaB(ZT1.getTexte());
                 ZT1.clear();
@@ -153,6 +152,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
             }
             else{
                 motcharac1=convertirBaT(ZT1.getTexte());
+                ZT1.clear();
                 for(char & caractere : motcharac1){
                     ZT1.setTexte(caractere);
                 }
@@ -169,13 +169,20 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         TB2.setClicked(TB2.isOver(mouse_X, mouse_Y));
         if(TB2.getClicked()){
             isAlreadyPushTB2=true;
-        std::cout<<"tb2 ok"<<std::endl;
             if(!Binaire2){
-                
+                motBinaire2 = convertirTaB(ZT2.getTexte());
+                ZT2.clear();
+                for(char & caractere : motBinaire2) {
+                    ZT2.setTexte(caractere);
+                }
                 Binaire2=true;
             }
             else{
-                std::cout<<"affiche du texte"<<std::endl;
+                motcharac2=convertirBaT(ZT2.getTexte());
+                ZT2.clear();
+                for(char & caractere : motcharac2){
+                    ZT2.setTexte(caractere);
+                }
                 Binaire2=false;
             }
         }

@@ -34,3 +34,16 @@ std::string genererNomPays() {
 
 	return nomPays;
 }
+/*
+std::string traduction(std::string mots,std::string pays){
+	std::string nomfichier="config/pays/"+pays+"txt"
+	int nbligne=0,idligne;
+	std::ifstream compteLigne;
+	std::ifstream mots;
+
+	compteLigne.open("config/pays/France.txt",std::ifstream::in);
+	mots.open(nomfichier,std::ifstream::in);
+	
+	if (!comptePays || !mots)
+		std::cerr << "Erreur dans l'ouverture de listePays.txt" << std::endl;	
+}*/
