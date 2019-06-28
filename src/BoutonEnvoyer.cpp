@@ -128,22 +128,45 @@ void Mise_A_jour_Position(std::string &pays,sf::RenderWindow &w,uint DiffX,uint 
 	}
 }
 
-void Action_Console(std::string &pays,sf::Font &font){
+void Action_Console(std::string &pays,sf::Font &font,sf::RenderWindow &w,uint CMD_lign_X,uint CMD_lign_Y){
  
+ 	std::string messagePays="Envoye du fichier en "+pays;
+ 	//definition des sf::text
 	sf::Text ipAdressDepart;
 	sf::Text MessageFichierRecu;
 	sf::Text paysDestination;
 	sf::Text ipAdressArriver;
 
+	//definition de la font
 	ipAdressDepart.setFont(font);
 	MessageFichierRecu.setFont(font);
 	paysDestination.setFont(font);
 	ipAdressArriver.setFont(font);
 
+	//definition de la taille
 	ipAdressDepart.setCharacterSize(24);
 	MessageFichierRecu.setCharacterSize(24);
 	paysDestination.setCharacterSize(24);
 	ipAdressArriver.setCharacterSize(24);
+
+	//couleur du texte
+	ipAdressDepart.setFillColor(sf::Color::Green);
+	MessageFichierRecu.setFillColor(sf::Color::Green);
+	paysDestination.setFillColor(sf::Color::Green);
+	ipAdressArriver.setFillColor(sf::Color::Green);
+
+	ipAdressDepart.setPosition(sf::Vector2f(200,200));
+	ipAdressArriver.setPosition(sf::Vector2f(CMD_lign_X,CMD_lign_Y));
+
+	//definition des messages
+	MessageFichierRecu.setString("Fichier reçu");
+	paysDestination.setString(messagePays);
+
+	std::string ipadressmessage;
+
+	ipAdressDepart.setString("test");
+	w.draw(ipAdressDepart);
+
 
 	uint nbIP1=nbIP();
 	uint nbIP2=nbIP();
@@ -164,16 +187,19 @@ void Action_Console(std::string &pays,sf::Font &font){
 	uint timeIPR=(20/nbIP2);
 	unsigned tmax = timeIPE; 
 	for(int i=1;i<nbIP1+1;i++){
-		std::cout<<"Envoye en cours de " <<TIP1[i-1] <<" à "<<TIP1[i]<<std::endl;
-		sleep(tmax); 
+		std::cout<<"ok"<<std::endl;
+		ipadressmessage="Envoye en cours de " +TIP1[i-1] +" à "+TIP1[i]+"\n";//creer le message
+		ipAdressDepart.setString(ipadressmessage);//le passe dans le sf::Text
+		w.draw(ipAdressDepart);//draw du sf::Text
+		sleep(tmax); //pause
 
 	}
-	std::cout<<"fichier reçu"<<std::endl;
+	/*std::cout<<"fichier reçu"<<std::endl;
 
 	for(int i=0;i<nbIP2;i++){
 		std::cout<<"Envoye en cours de " <<TIP2[i] <<" à "<<TIP2[i+1]<<std::endl;
 		sleep(tmax); 
 
 	}
-	std::cout<<"fichier reçu"<<std::endl;
+	std::cout<<"fichier reçu"<<std::endl;*/
 }

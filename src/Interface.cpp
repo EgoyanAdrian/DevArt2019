@@ -57,7 +57,8 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
     console.setPosition(size_X,size_Y);
     w.draw(console);
 
-
+    uint CMD_lign_X=size_X;
+    uint CMD_lign_Y=size_Y;
     Mise_A_jour_Position(pays,w,DiffX,diffY);
 
     if(isPush){
@@ -65,7 +66,7 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
             if(BoutonEnvoyer.getClicked()){
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
-                //Action_Console(pays,font);
+                Action_Console(pays,font,w,CMD_lign_X,CMD_lign_Y);
             }
     }
     else
@@ -200,7 +201,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
             if(BoutonEnvoyer.getClicked()){
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
-                //Action_Console(pays,font);
+                //Action_Console(pays,font,w,CMD_lign_X,CMD_lign_Y);
             }
     }
 }
