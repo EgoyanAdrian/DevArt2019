@@ -97,8 +97,6 @@ void hacking(ZoneTexte & ZT2) {
 		zt2String = convertirTaB(ZT2.getTexte());
 	}
 
-	std::cout << zt2String << std::endl;
-
 	for(char & caractere : zt2String) {
 		nbChar++;
 	}
@@ -117,7 +115,6 @@ void hacking(ZoneTexte & ZT2) {
 		}
 		posAct++;
 	}
-	std::cout << zt2Tempo << std::endl;
 	ZT2.clear();
 	if(ZT2.getBinaire()) {
 		for(char & caractere : zt2Tempo)

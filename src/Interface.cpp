@@ -84,7 +84,7 @@ bool isover(sf::RectangleShape &Rectangle,uint mouse_X,uint mouse_Y){
     return(((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
 }
 
-void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush,bool &isAlreadyPushTB1,bool &isAlreadyPushTB2,std::string &corruptionValue,bool &tjourCorr,bool &isAlreadyPushBC){
+void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush,bool &isAlreadyPushTB1,bool &isAlreadyPushTB2,std::string &corruptionValue,bool &tjourCorr,bool &isAlreadyPushBC, bool &isHacking, bool &toujHacking){
     //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -122,17 +122,9 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
 
     uint RWDx=200;
     uint RWDy=30;
-    Bouton BoutonWindDeff(10+R1x+30+R2x+30,420+diffY,RWDx,RWDy,"Window Defendeur",font,false);
+    Bouton BoutonWindDeff(10+R1x+30+R2x+30,420+diffY,RWDx,RWDy,"Windows Defender",font,false);
     BoutonEnvoyer.upgrade(w);
     w.draw(BoutonEnvoyer);
-
-    
-    
-    
-
-    BoutonWindDeff.upgrade(w);
-    w.draw(BoutonWindDeff);
-
 
     Bouton TB1(10+40+DiffX/2,540+diffY,132,25,"Texte/Binaire",font);
     TB1.upgrade(w);
@@ -241,7 +233,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     AideCorrum.setPosition(size_X,size_Y);
 
 
-    if(isPush&&(!isAlreadyPush)&&!tjourCorr){
+    if(isPush&&(!isAlreadyPush)&&!tjourCorr&&!toujHacking){
         BoutonEnvoyer.setClicked(BoutonEnvoyer.isOver(mouse_X, mouse_Y));
             if(BoutonEnvoyer.getClicked()){
                 isAlreadyPush=true;
@@ -255,7 +247,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 for(char & caractere : ZT2tempo)
                     ZT1.setTexte(caractere);
 
-                if(chance(5)){
+                if(chance(20)){
                     tjourCorr=corrup=true;
                     ZT2.clear();
                     std::string modif=corruption(convertirTaB(ZT1.getTexte()),corruptionValue);
@@ -266,6 +258,9 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                     }
                     ZT2.upgrade(w);
                     w.draw(ZT2);
+                } else if(chance(10)) {
+                    isHacking = toujHacking = true;
+                    hacking(ZT2);
                 }
             }
         isPush=false;
@@ -273,6 +268,25 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     if(tjourCorr){
         compareCorronp(ZT1.getTexte(),ZT2.getTexte(),corruptionValue,AideCorrum,w,BoutonComp,SousAideeCorrom,mouse_X,mouse_Y,isAlreadyPushBC,isPush,tjourCorr);
     }
+
+    if(isHacking || toujHacking){
+        BoutonWindDeff.setIsVisible(true);
+    }
+    else
+        BoutonWindDeff.setIsVisible(false);
+
+    std::string te = "La menace a ete pulverise";
+
+    if(isPush&&isHacking) {
+        BoutonWindDeff.setClicked(BoutonWindDeff.isOver(mouse_X, mouse_Y));
+        if(BoutonWindDeff.getClicked()) {
+            isHacking = toujHacking = false;
+        }
+
+    }
+
+    BoutonWindDeff.upgrade(w);
+    w.draw(BoutonWindDeff);
 }
 
 void compareCorronp(std::string orrig,std::string corrom,std::string &indiceCor,ZoneTexte &AideCorrom,sf::RenderWindow &w,Bouton &BoutCompa,sf::RectangleShape &SousAideeCorrom,uint mouse_X,uint mouse_Y,bool &isAlreadyPushBC,bool &isPush,bool &tjourCorr){

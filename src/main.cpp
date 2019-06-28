@@ -29,6 +29,8 @@ int main() {
     bool Binaire2=true;
     bool tjourCorr=false;
     bool isAlreadyPushBC=false;
+    bool isHacking=false;
+    bool toujHacking=false;
 
     char lettre;
     std::string motBinaire;
@@ -66,6 +68,11 @@ int main() {
         sf::Event event;
         while (window.pollEvent(event))
         {
+            if(isHacking) {
+                if(chance(250)) {
+                    hacking(zText2);
+                }
+            }
             // évènement "fermeture demandée" : on ferme la fenêtre
             if (event.type == sf::Event::Closed)
                 window.close();
@@ -140,7 +147,7 @@ int main() {
             Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,corruptionValue,tjourCorr);
         }
         else{
-            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,isAlreadyPushTB1,isAlreadyPushTB2,corruptionValue,tjourCorr,isAlreadyPushBC);
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,isAlreadyPushTB1,isAlreadyPushTB2,corruptionValue,tjourCorr,isAlreadyPushBC,isHacking, toujHacking);
         }
 
         if(EnvoyerisAcitve){
@@ -168,9 +175,9 @@ int main() {
                 cmd.setTexte(caractere);
                 }
             }
-            espace+="\n";
+            /*espace+="\n";
             for(char & caractere : espace)
-                cmd.setTexte(caractere);
+                cmd.setTexte(caractere);*/
 
 
             for(char & caractere : messagefichierenvo) {
@@ -181,9 +188,9 @@ int main() {
                 cmd.setTexte(caractere);
             }
 
-            espace+="\n";
+            /*espace+="\n";
             for(char & caractere : espace)
-                cmd.setTexte(caractere);
+                cmd.setTexte(caractere);*/
 
             for(int i=0;i<nbIP2;i++){
             ipadressdapart+=TIP2[i] +"-"+TIP2[i+1]+"\n";
@@ -195,10 +202,17 @@ int main() {
             for(char & caractere : messagefichierrec) {
                 cmd.setTexte(caractere);
             }
-            espace+="\n\n\n\n";
+            /*espace+="\n\n\n\n";
             for(char & caractere : espace)
-                cmd.setTexte(caractere);
+                cmd.setTexte(caractere);*/
+
             EnvoyerisAcitve=false;
+
+            if(isHacking) {
+                espace = "\nHACKING EN COURS\n";
+                for(char & caractere : espace)
+                    cmd.setTexte(caractere);
+            }
         }
         if(corrupti){
             corrupti=false;  
