@@ -38,14 +38,15 @@ std::string ZoneTexte::getTexte() const {
 }
 
 void ZoneTexte::setTexte(char lettre) {
-	std::string texteTemp = "";
+	std::string texteTemp = "", texteCourant = texteArea.getString();
 	sf::Vector2f size(this->getSize());
 	sf::FloatRect _textAreaSize = texteArea.getGlobalBounds();
 	int maxChar = (size.x / texteArea.getCharacterSize());
 
 	if((isLimitless) && (_textAreaSize.height >= size.y)) {
-		std::size_t pos = texteTemp.find('\n');
-		texteTemp = texteTemp.substr(pos);
+		std::size_t pos = texteCourant.find("\n");
+		if(pos != std::string::npos)
+			texteCourant = texteCourant.substr(pos + 1);
 	} else if((!isLimitless) && (_textAreaSize.height >= size.y)) {
 		return;
 	}
@@ -56,7 +57,7 @@ void ZoneTexte::setTexte(char lettre) {
 
 	texteTemp += lettre;
 	nbCar++;
-	texteArea.setString(texteArea.getString() + texteTemp);
+	texteArea.setString(texteCourant + texteTemp);
 }
 
 bool ZoneTexte::isOver(int _x, int _y) const {
