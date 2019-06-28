@@ -27,11 +27,13 @@ int main() {
     bool isAlreadyPushTB2=false;
     bool Binaire1=false;
     bool Binaire2=true;
+    bool tjourCorr=false;
+    bool isAlreadyPushBC=false;
 
     char lettre;
     std::string motBinaire;
     bool isShiftPressed;
-
+    std::string corruptionValue;
     std::string CorruptiondesDonne;
     std::string messagePays;
     std::string ipadressdapart;
@@ -149,10 +151,10 @@ int main() {
         window.clear(sf::Color::White);
         
         if(!EnvoyisFirstPush){
-            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush);
+            Interface(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,corruptionValue,tjourCorr);
         }
         else{
-            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,isAlreadyPushTB1,isAlreadyPushTB2);
+            Interface2(window,mouse_X,mouse_Y,isPush,EnvoyisFirstPush,pays,BsizeX,BsizeY,font,Binaire1,Binaire2,cmd,zText1,zText2,EnvoyerisAcitve,corrupti,isAlreadyPush,isAlreadyPushTB1,isAlreadyPushTB2,corruptionValue,tjourCorr,isAlreadyPushBC);
         }
 
         if(EnvoyerisAcitve){
@@ -207,8 +209,10 @@ int main() {
             }
             corrupti=false;  
         }
-        cmd.upgrade(window);
-        window.draw(cmd);
+        if(!tjourCorr){
+            cmd.upgrade(window);
+            window.draw(cmd);
+        }
         zText1.upgrade(window);
         zText2.upgrade(window);
         window.draw(zText1);

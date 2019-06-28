@@ -2,7 +2,7 @@
 #include <iostream>
 #include <BoutonEnvoyer.hpp>
 
-void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush){
+void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush,std::string &corruptionValue,bool &tjourCorr){
    //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -59,8 +59,16 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
-                if(chance(10)){
-                    corruption(ZT1.getTexte(),corrup);
+                if(chance(3)){
+                    tjourCorr=corrup=true;
+                    ZT2.clear();
+                    std::cout<<"corruption"<<std::endl;
+                    std::string modif=corruption(convertirTaB(ZT1.getTexte()),corruptionValue);
+                    for(char & caractere : modif) {
+                        ZT2.setTexte(caractere);
+                    }
+                    ZT2.upgrade(w);
+                    w.draw(ZT2);
 
                 }
             }
@@ -77,7 +85,7 @@ bool isover(sf::RectangleShape &Rectangle,uint mouse_X,uint mouse_Y){
     return(((pos.x< mouse_X) && (pos.x+ size.x > mouse_X)) && ((pos.y< mouse_Y) && (pos.y+ size.y > mouse_Y)));
 }
 
-void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush,bool &isAlreadyPushTB1,bool &isAlreadyPushTB2){
+void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &EnvoyerisFisrtPush,std::string &pays,uint BsizeX,uint BsizeY,sf::Font &font,bool &Binaire1, bool &Binaire2,ZoneTexte &ZT,ZoneTexte &ZT1,ZoneTexte &ZT2,bool &EnvoyerisAcitve,bool &corrup,bool &isAlreadyPush,bool &isAlreadyPushTB1,bool &isAlreadyPushTB2,std::string &corruptionValue,bool &tjourCorr,bool &isAlreadyPushBC){
     //recupere les dimentions de l'écran
     sf::Vector2u dimeEcran=w.getSize();
     uint diffX=dimeEcran.x-BsizeX;
@@ -111,20 +119,17 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     uint RBEy=30;
     Bouton BoutonEnvoyer(10+R1x+30+R2x+30, 500+diffY, RBEx, RBEy, "Envoyer", font);
     
-    uint RBCx=132;
-    uint RBCy=30;
-    Bouton BoutonComp(10+R1x+30+R2x+30,460+diffY,RBCx,RBCy,"Comparaison",font);
+    
 
     uint RWDx=200;
     uint RWDy=30;
-    Bouton BoutonWindDeff(10+R1x+30+R2x+30,420+diffY,RWDx,RWDy,"Window Defendeur",font);
+    Bouton BoutonWindDeff(10+R1x+30+R2x+30,420+diffY,RWDx,RWDy,"Window Defendeur",font,false);
     BoutonEnvoyer.upgrade(w);
     w.draw(BoutonEnvoyer);
 
     
     
-    BoutonComp.upgrade(w);
-    w.draw(BoutonComp);
+    
 
     BoutonWindDeff.upgrade(w);
     w.draw(BoutonWindDeff);
@@ -175,6 +180,8 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 for(char & caractere : motBinaire2) {
                     ZT2.setTexte(caractere);
                 }
+                ZT2.upgrade(w);
+                w.draw(ZT2);
                 Binaire2=true;
             }
             else{
@@ -183,6 +190,8 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 for(char & caractere : motcharac2){
                     ZT2.setTexte(caractere);
                 }
+                ZT2.upgrade(w);
+                w.draw(ZT2);
                 Binaire2=false;
             }
         }
@@ -193,7 +202,21 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     
         //affichage de la console
 
+    uint RBCx=132;
+    uint RBCy=30;
+    Bouton BoutonComp(10+R1x+30+R2x+30,460+diffY,RBCx,RBCy,"Comparaison",font,false);
 
+    
+
+
+    if(corrup||tjourCorr){
+        BoutonComp.setIsVisible(true);
+    }
+    else
+        BoutonComp.setIsVisible(false);
+
+    BoutonComp.upgrade(w);
+    w.draw(BoutonComp);
 
     //affichage du CMD
     uint Rpx=220+DiffX;
@@ -205,18 +228,104 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
 
     Mise_A_jour_Position(pays,w,DiffX,diffY);    
     
-    if(isPush&&(!isAlreadyPush)){
+    sf::RectangleShape SousAideeCorrom;
+    SousAideeCorrom.setSize(sf::Vector2f(Rpx,Rpy));
+    SousAideeCorrom.setPosition(size_X,size_Y);
+    SousAideeCorrom.setFillColor(sf::Color::White);
+    
+    ZoneTexte AideCorrum(0,0,0,0,font);
+    AideCorrum.setSize(sf::Vector2f(Rpx,Rpy));
+    AideCorrum.setPosition(size_X,size_Y);
+
+
+    if(isPush&&(!isAlreadyPush)&&!tjourCorr){
         BoutonEnvoyer.setClicked(BoutonEnvoyer.isOver(mouse_X, mouse_Y));
             if(BoutonEnvoyer.getClicked()){
-                isAlreadyPush=false;
+                isAlreadyPush=true;
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
-                if(chance(10)){
-                    corruption(ZT1.getTexte(),corrup);
+                if(chance(3)){
+                    std::cout<<"corruption"<<std::endl;
+                    tjourCorr=corrup=true;
+                    ZT2.clear();
+                    std::string modif=corruption(convertirTaB(ZT1.getTexte()),corruptionValue);
+                    for(char & caractere : modif) {
+                        ZT2.setTexte(caractere);
+                    }
+                    ZT2.upgrade(w);
+                    w.draw(ZT2);
                 }
             }
         isPush=false;
     }
+    if(tjourCorr){
+        compareCorronp(ZT1.getTexte(),ZT2.getTexte(),corruptionValue,AideCorrum,w,BoutonComp,SousAideeCorrom,mouse_X,mouse_Y,isAlreadyPushBC,isPush,tjourCorr);
+    }
 }
+
+void compareCorronp(std::string orrig,std::string corrom,std::string &indiceCor,ZoneTexte &AideCorrom,sf::RenderWindow &w,Bouton &BoutCompa,sf::RectangleShape &SousAideeCorrom,uint mouse_X,uint mouse_Y,bool &isAlreadyPushBC,bool &isPush,bool &tjourCorr){
+    std::string message="Attention des donnees on etais corrompu\nVoici comment les recuperes";
+    std::string Aidee="Les 0 signifie de le bytes (0 ou 1) non pas changes, les 2 signifie que les bytes ont etais change par des 0\nles 6 signifie que les bytes on etais change en 1 et\n le 9 signifie que les bytes on etais change pas des 0 ou des 1";
+    std::string liste="Les modifications doivent etre apporter sur la fenetre en rouge\nvoici votre aide: "+indiceCor+"\n";
+    std::string consig="effectuer les modifications puis clicke sur 'Comparaison'";
     
+    
+
+    for(char & caractere : message) {
+        AideCorrom.setTexte(caractere);
+    }
+    for(char & caractere : Aidee) {
+        AideCorrom.setTexte(caractere);
+    }
+    for(char & caractere : liste) {
+        AideCorrom.setTexte(caractere);
+    }
+    for(char & caractere : consig) {
+        AideCorrom.setTexte(caractere);
+    }
+    AideCorrom.upgrade(w);
+    w.draw(AideCorrom);
+
+    if(tjourCorr){
+        std::string liste="Le probleme n'est pas resolute voici l'aide avec les modification trouver\n"+indiceCor+"\n";
+        for(char & caractere : liste){
+            AideCorrom.setTexte(caractere);
+        }
+        AideCorrom.upgrade(w);
+        w.draw(AideCorrom);
+    }
+
+    if(isPush&&(!isAlreadyPushBC)){
+        
+        BoutCompa.setClicked(BoutCompa.isOver(mouse_X,mouse_Y));
+        if(BoutCompa.getClicked()){
+            std::cout<<"ok"<<std::endl;
+            isAlreadyPushBC=true;
+            if(ComparaisonBetB(orrig,corrom,indiceCor)){
+                std::cout<<"conparaison identique"<<std::endl;
+                tjourCorr=false;
+            }
+        }
+        
+    }
+}
+
+
+bool ComparaisonBetB(std::string orrig,std::string corrom,std::string &indiceCor){
+    uint a;
+    bool same=true;
+    if(corrom.size()<orrig.size())
+        a=corrom.size();
+    else
+        a=orrig.size();
+    
+    for(uint i=0; i<a;i++){
+        if(corrom[i]==orrig[i]){
+            indiceCor[i]='0';
+        }
+        else
+            same=false;
+    }
+    return same;
+}

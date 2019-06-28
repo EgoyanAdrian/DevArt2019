@@ -25,7 +25,7 @@ void Bouton::upgrade(sf::RenderWindow & fenetre) {
 	else if(isVisible && clicked)
 		this->setOutlineColor(sf::Color::Blue);
 	else
-		this->setOutlineColor(sf::Color::Red);
+		this->setOutlineColor(sf::Color(192,192,192));
 
 	fenetre.draw(texte);
 }

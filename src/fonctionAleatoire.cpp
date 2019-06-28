@@ -57,28 +57,28 @@ bool chance(int max){
 	return(1==valeur);
 }
 
-std::string corruption(std::string _texte,bool &corruption) {
+std::string corruption(std::string _texte,std::string &corruptionValue) {
 	srand(time(0));
 	int val;
+	corruptionValue="";
 	std::string texteTempo = "";
-
 	for(char & caractere : _texte) {
 		val = rand()%9 + 1;
-		
 		if(val == 2){
 			texteTempo += '0';
-			corruption=true;
+			corruptionValue+="2";
 		}
 		else if(val == 6){
 			texteTempo += '1';
-			corruption=true;
+			corruptionValue+="6";
 		}
 		else if(val == 9){
 			texteTempo = texteTempo;
-			corruption=true;
+			corruptionValue+="9";
 		}
 		else
 			texteTempo += caractere;
+			corruptionValue+="0";
 	}
 
 	return texteTempo;
