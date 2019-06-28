@@ -33,6 +33,7 @@ int main() {
     char lettre;
     std::string motBinaire;
     bool isShiftPressed;
+    std::string espace;
     std::string corruptionValue;
     std::string CorruptiondesDonne;
     std::string messagePays;
@@ -162,11 +163,15 @@ int main() {
             uint timeIPR=(20/nbIP2);
             unsigned tmax = timeIPE; 
             for(int i=1;i<nbIP1+1;i++){
-                ipadressdapart="Envoye en cours de " +TIP1[i-1] +" a "+TIP1[i]+"\n";//creer le message
+                ipadressdapart=TIP1[i-1] +"-"+TIP1[i]+"\n";//creer le message
                 for(char & caractere : ipadressdapart) {
                 cmd.setTexte(caractere);
                 }
             }
+            espace+="\n";
+            for(char & caractere : espace)
+                cmd.setTexte(caractere);
+
 
             for(char & caractere : messagefichierenvo) {
                 cmd.setTexte(caractere);
@@ -175,8 +180,13 @@ int main() {
             for(char & caractere : messagePays) {
                 cmd.setTexte(caractere);
             }
+
+            espace+="\n";
+            for(char & caractere : espace)
+                cmd.setTexte(caractere);
+
             for(int i=0;i<nbIP2;i++){
-            ipadressdapart+"Envoye en cours de " +TIP2[i] +" à "+TIP2[i+1]+"\n";
+            ipadressdapart+=TIP2[i] +"-"+TIP2[i+1]+"\n";
                 for(char & caractere : ipadressdapart) {
                 cmd.setTexte(caractere);
                 }
@@ -185,13 +195,12 @@ int main() {
             for(char & caractere : messagefichierrec) {
                 cmd.setTexte(caractere);
             }
+            espace+="\n\n\n\n";
+            for(char & caractere : espace)
+                cmd.setTexte(caractere);
             EnvoyerisAcitve=false;
         }
         if(corrupti){
-            CorruptiondesDonne="Attention fichier corrompue\n";
-            for(char & caractere : CorruptiondesDonne) {
-                cmd.setTexte(caractere);
-            }
             corrupti=false;  
         }
         if(!tjourCorr){

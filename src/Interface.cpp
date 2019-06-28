@@ -59,10 +59,9 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
-                if(chance(3)){
+                if(chance(5)){
                     tjourCorr=corrup=true;
                     ZT2.clear();
-                    std::cout<<"corruption"<<std::endl;
                     std::string modif=corruption(convertirTaB(ZT1.getTexte()),corruptionValue);
                     for(char & caractere : modif) {
                         ZT2.setTexte(caractere);
@@ -254,8 +253,7 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 for(char & caractere : ZT2tempo)
                     ZT1.setTexte(caractere);
 
-                if(chance(3)){
-                    std::cout<<"corruption"<<std::endl;
+                if(chance(5)){
                     tjourCorr=corrup=true;
                     ZT2.clear();
                     std::string modif=corruption(convertirTaB(ZT1.getTexte()),corruptionValue);
@@ -311,10 +309,8 @@ void compareCorronp(std::string orrig,std::string corrom,std::string &indiceCor,
         
         BoutCompa.setClicked(BoutCompa.isOver(mouse_X,mouse_Y));
         if(BoutCompa.getClicked()){
-            std::cout<<"ok"<<std::endl;
             isAlreadyPushBC=true;
             if(ComparaisonBetB(orrig,corrom,indiceCor)){
-                std::cout<<"conparaison identique"<<std::endl;
                 tjourCorr=false;
             }
         }
