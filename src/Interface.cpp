@@ -249,6 +249,8 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
                 std::string ZT2tempo = ZT2.getTexte();
+                Binaire1 = Binaire2;
+                ZT1.setBinaire(Binaire1);
                 ZT1.clear();
                 for(char & caractere : ZT2tempo)
                     ZT1.setTexte(caractere);
