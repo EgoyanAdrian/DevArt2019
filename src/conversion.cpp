@@ -133,6 +133,12 @@ char lettreKey(sf::Event _event, bool isShiftPressed) {
     	    case sf::Keyboard::Z:
     	        	lettre = 'z';
     	        break;
+            case sf::Keyboard::Space:
+                    lettre = ' ';
+                break;
+            case sf::Keyboard::BackSpace:
+                    lettre = '-';
+                break;
     	    default:
     	            lettre = '\n';
     	        break;
@@ -217,6 +223,12 @@ char lettreKey(sf::Event _event, bool isShiftPressed) {
     	    case sf::Keyboard::Z:
     	        	lettre = 'Z';
     	        break;
+            case sf::Keyboard::Space:
+                    lettre = ' ';
+                break;
+            case sf::Keyboard::BackSpace:
+                    lettre = '-';
+                break;
     		default:
     				lettre = '\n';
     			break;

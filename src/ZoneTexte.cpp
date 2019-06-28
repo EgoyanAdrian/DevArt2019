@@ -64,6 +64,13 @@ void ZoneTexte::clear() {
 	texteArea.setString("");
 }
 
+void ZoneTexte::remove() {
+	std::string texteTempo;
+	texteTempo = texteArea.getString();
+	texteTempo = texteTempo.substr(0, texteTempo.length() - 1);
+	texteArea.setString(texteTempo);
+}
+
 bool ZoneTexte::isOver(int _x, int _y) const {
 	sf::Vector2f pos(this->getPosition());
 	sf::Vector2f size(this->getSize());

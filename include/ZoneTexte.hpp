@@ -24,6 +24,7 @@ class ZoneTexte : public sf::RectangleShape {
 		void setTexte(char lettre);
 
 		void clear();
+		void remove();
 
 		bool isOver(int _x, int _y) const;
 

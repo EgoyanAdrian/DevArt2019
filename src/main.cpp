@@ -98,7 +98,11 @@ int main() {
 
                 if(!EnvoyisFirstPush) {
                     if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull()) && (!zText2.isFull())) {
-                        zText1.setTexte(lettre);
+                        if(lettre == '-') {
+                            zText1.remove();
+                        } else {
+                            zText1.setTexte(lettre);
+                        }
                         motBinaire = convertirTaB(zText1.getTexte());
                         zText2.clear();
                         for(char & caractere : motBinaire) {
@@ -107,9 +111,17 @@ int main() {
                     }
                 } else {
                     if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull())) {
-                        zText1.setTexte(lettre);
+                        if(lettre == '-') {
+                            zText1.remove();
+                        } else {
+                            zText1.setTexte(lettre);
+                        }
                     } else if((zText2.getClicked()) && (lettre != '\n') && (!zText2.isFull())) {
-                        zText2.setTexte(lettre);
+                        if(lettre == '-') {
+                            zText2.remove();
+                        } else {
+                            zText2.setTexte(lettre);
+                        }
                     }
                 }
             }
