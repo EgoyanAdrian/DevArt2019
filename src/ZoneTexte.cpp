@@ -25,6 +25,14 @@ void ZoneTexte::setClicked(bool _isClicked) {
 	isClicked = _isClicked;
 }
 
+bool ZoneTexte::getLimitless() const {
+	return isLimitless;
+}
+
+void ZoneTexte::setLimitless(bool _isLimitless) {
+	isLimitless = _isLimitless;
+}
+
 std::string ZoneTexte::getTexte() const {
 	return texteArea.getString();
 }
@@ -35,15 +43,20 @@ void ZoneTexte::setTexte(char lettre) {
 	sf::FloatRect _textAreaSize = texteArea.getGlobalBounds();
 	int maxChar = (size.x / texteArea.getCharacterSize());
 
-	if(_textAreaSize.height < size.y) {
-		if((nbCar != 0) && ((nbCar % maxChar) == 0)) {
-			texteTemp += '\n';
-		}
-
-		texteTemp += lettre;
-		nbCar++;
-		texteArea.setString(texteArea.getString() + texteTemp);
+	if((isLimitless) && (_textAreaSize.height >= size.y)) {
+		std::size_t pos = texteTemp.find('\n');
+		texteTemp = texteTemp.substr(pos);
+	} else if((!isLimitless) && (_textAreaSize.height >= size.y)) {
+		return;
 	}
+
+	if((nbCar != 0) && ((nbCar % maxChar) == 0)) {
+		texteTemp += '\n';
+	}
+
+	texteTemp += lettre;
+	nbCar++;
+	texteArea.setString(texteArea.getString() + texteTemp);
 }
 
 bool ZoneTexte::isOver(int _x, int _y) const {
@@ -57,6 +70,7 @@ void ZoneTexte::upgrade(sf::RenderWindow & fenetre) {
 	this->setOutlineThickness(3);
 	this->setOutlineColor(sf::Color::Black);
 
+	texteArea.setPosition(this->getPosition());
 	fenetre.draw(texteArea);
 }
 
