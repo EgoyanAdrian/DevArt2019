@@ -148,20 +148,22 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         if(TB1.getClicked()){
         isAlreadyPushTB1=true;
             if(!Binaire1){
+                Binaire1=true;
+                ZT1.setBinaire(Binaire1);
                 motBinaire1 = convertirTaB(ZT1.getTexte());
                 ZT1.clear();
                 for(char & caractere : motBinaire1) {
                     ZT1.setTexte(caractere);
                 }
-                Binaire1=true;
             }
             else{
+                Binaire1=false;
+                ZT1.setBinaire(Binaire1);
                 motcharac1=convertirBaT(ZT1.getTexte());
                 ZT1.clear();
                 for(char & caractere : motcharac1){
                     ZT1.setTexte(caractere);
                 }
-                Binaire1=false;
             }
         }
     }
@@ -175,6 +177,8 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         if(TB2.getClicked()){
             isAlreadyPushTB2=true;
             if(!Binaire2){
+                Binaire2=true;
+                ZT2.setBinaire(Binaire2);
                 motBinaire2 = convertirTaB(ZT2.getTexte());
                 ZT2.clear();
                 for(char & caractere : motBinaire2) {
@@ -182,9 +186,10 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 }
                 ZT2.upgrade(w);
                 w.draw(ZT2);
-                Binaire2=true;
             }
             else{
+                Binaire2 = false;
+                ZT2.setBinaire(Binaire2);
                 motcharac2=convertirBaT(ZT2.getTexte());
                 ZT2.clear();
                 for(char & caractere : motcharac2){
@@ -192,7 +197,6 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 }
                 ZT2.upgrade(w);
                 w.draw(ZT2);
-                Binaire2=false;
             }
         }
     }
@@ -245,11 +249,18 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
+                std::string ZT2tempo = ZT2.getTexte();
+                ZT1.clear();
+                for(char & caractere : ZT2tempo)
+                    ZT1.setTexte(caractere);
+
                 if(chance(3)){
                     std::cout<<"corruption"<<std::endl;
                     tjourCorr=corrup=true;
                     ZT2.clear();
                     std::string modif=corruption(convertirTaB(ZT1.getTexte()),corruptionValue);
+                    Binaire2 = true;
+                    ZT2.setBinaire(Binaire2);
                     for(char & caractere : modif) {
                         ZT2.setTexte(caractere);
                     }

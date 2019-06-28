@@ -34,7 +34,14 @@ void ZoneTexte::setLimitless(bool _isLimitless) {
 }
 
 std::string ZoneTexte::getTexte() const {
-	return texteArea.getString();
+	std::string texteRetour;
+	std::string texteTempo = texteArea.getString();
+	for(char & caractere : texteTempo) {
+		if(caractere != '\n')
+			texteRetour += caractere;
+	}
+	
+	return texteRetour;
 }
 
 void ZoneTexte::setTexte(char lettre) {
@@ -43,32 +50,31 @@ void ZoneTexte::setTexte(char lettre) {
 	sf::FloatRect _textAreaSize = texteArea.getGlobalBounds();
 	int maxChar = (size.x / texteArea.getCharacterSize());
 
-	if((isLimitless) && (_textAreaSize.height >= size.y)) {
-		std::size_t pos = texteCourant.find("\n");
-		if(pos != std::string::npos)
-			texteCourant = texteCourant.substr(pos + 1);
-	} else if((!isLimitless) && (_textAreaSize.height >= size.y)) {
-		return;
-	}
+	if((!isBinaire) || (isBinaire && ((lettre == '0') || (lettre == '1')))) {
+		if((isLimitless) && (_textAreaSize.height >= size.y)) {
+			std::size_t pos = texteCourant.find("\n");
+			if(pos != std::string::npos)
+				texteCourant = texteCourant.substr(pos + 1);
+		} else if((!isLimitless) && (_textAreaSize.height >= size.y)) {
+			return;
+		}
 
-	if((nbCar != 0) && ((nbCar % maxChar) == 0)) {
-		texteTemp += '\n';
-	}
+		if((nbCar != 0) && ((nbCar % maxChar) == 0)) {
+			texteTemp += '\n';
+		}
 
-	texteTemp += lettre;
-	nbCar++;
-	texteArea.setString(texteCourant + texteTemp);
-	if(isClicked) {posCurseur = nbCar;}
+		texteTemp += lettre;
+		nbCar++;
+		texteArea.setString(texteCourant + texteTemp);
+	}
 }
 
-int ZoneTexte::getCurseur() const {
-	return posCurseur;
+int ZoneTexte::getBinaire() const {
+	return isBinaire;
 }
 
-void ZoneTexte::setCurseur(int _posCurseur) {
-	std::string texteTempo = texteArea.getString();
-	if((_posCurseur >= 0) && (_posCurseur <= texteTempo.length()))
-		posCurseur = _posCurseur;
+void ZoneTexte::setBinaire(bool _isBinaire) {
+	isBinaire = _isBinaire;
 }
 
 void ZoneTexte::clear() {
@@ -80,16 +86,7 @@ void ZoneTexte::remove() {
 	texteTempo = texteArea.getString();
 	
 	if(texteTempo.length() > 0) {
-		if(posCurseur == 0) {
-			texteRetour = texteTempo.substr(1, texteTempo.length());
-		} else if(posCurseur == texteTempo.length()) {
-			texteRetour = texteTempo.substr(0, texteTempo.length() - 1);
-			posCurseur = texteTempo.length() - 1;
-		} else {
-			texteRetour = texteTempo.substr(0, posCurseur);
-			texteRetour += texteTempo.substr(posCurseur + 1, texteTempo.length());
-		}
-
+		texteRetour = texteTempo.substr(0, texteTempo.length() - 1);
 		nbCar--;
 	}
 	

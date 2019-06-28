@@ -52,8 +52,6 @@ int main() {
     cmd.setLimitless(true);
     ZoneTexte zText1(0,0,0,0,font);
     ZoneTexte zText2(0,0,0,0,font);
-    sf::Text curseur1("", font);
-    sf::Text curseur2("", font);
 
     //Bouton (10, 20, 50, 70, "Test", font);
     
@@ -104,10 +102,6 @@ int main() {
                     if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull()) && (!zText2.isFull())) {
                         if(lettre == '-') {
                             zText1.remove();
-                        } else if(lettre == '<') {
-                            zText1.setCurseur(zText1.getCurseur() - 1);
-                        } else if(lettre == '>') {
-                            zText1.setCurseur(zText1.getCurseur() + 1);
                         } else {
                             zText1.setTexte(lettre);
                         }
@@ -121,26 +115,17 @@ int main() {
                     if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull())) {
                         if(lettre == '-') {
                             zText1.remove();
-                        } else if(lettre == '<') {
-                            zText1.setCurseur(zText1.getCurseur() - 1);
-                        } else if(lettre == '>') {
-                            zText1.setCurseur(zText1.getCurseur() + 1);
                         } else {
                             zText1.setTexte(lettre);
                         }
                     } else if((zText2.getClicked()) && (lettre != '\n') && (!zText2.isFull())) {
                         if(lettre == '-') {
                             zText2.remove();
-                        } else if(lettre == '<') {
-                            zText2.setCurseur(zText2.getCurseur() - 1);
-                        } else if(lettre == '>') {
-                            zText2.setCurseur(zText2.getCurseur() + 1);
                         } else {
                             zText2.setTexte(lettre);
                         }
                     }
                 }
-                std::cout << zText1.getCurseur() << zText2.getCurseur() << std::endl;
             }
 
             if(event.type == sf::Event::KeyReleased) {
@@ -213,21 +198,12 @@ int main() {
             cmd.upgrade(window);
             window.draw(cmd);
         }
+        zText1.setBinaire(Binaire1);
         zText1.upgrade(window);
+        zText2.setBinaire(Binaire2);
         zText2.upgrade(window);
         window.draw(zText1);
         window.draw(zText2);
-        window.draw(curseur1);
-        window.draw(curseur2);
-
-        curseur1.setString(std::to_string(zText1.getCurseur()));
-        curseur2.setString(std::to_string(zText2.getCurseur()));
-        curseur1.setFillColor(sf::Color::Black);
-        curseur2.setFillColor(sf::Color::Black);
-        curseur1.setCharacterSize(10);
-        curseur2.setCharacterSize(10);
-        curseur1.setPosition(zText1.getPosition() + sf::Vector2f(0, -20));
-        curseur2.setPosition(zText2.getPosition() + sf::Vector2f(0, -20));
 
         window.display();
     }

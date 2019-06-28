@@ -7,9 +7,9 @@
 class ZoneTexte : public sf::RectangleShape {
 	sf::Text texteArea;
 	int nbCar = 0;
-	int posCurseur = 0;
 	bool isClicked = false;
 	bool isLimitless = false;
+	bool isBinaire = false;
 
 	public:
 		ZoneTexte(int _x, int _y, uint _largeur, uint _hauteur, sf::Font & font);
@@ -24,8 +24,8 @@ class ZoneTexte : public sf::RectangleShape {
 		std::string getTexte() const;
 		void setTexte(char lettre);
 
-		int getCurseur() const;
-		void setCurseur(int _posCurseur);
+		int getBinaire() const;
+		void setBinaire(bool _isBinaire);
 
 		void clear();
 		void remove();
