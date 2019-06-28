@@ -60,6 +60,10 @@ void ZoneTexte::setTexte(char lettre) {
 	texteArea.setString(texteCourant + texteTemp);
 }
 
+void ZoneTexte::clear() {
+	texteArea.setString("");
+}
+
 bool ZoneTexte::isOver(int _x, int _y) const {
 	sf::Vector2f pos(this->getPosition());
 	sf::Vector2f size(this->getSize());

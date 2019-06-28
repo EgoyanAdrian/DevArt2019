@@ -23,6 +23,8 @@ class ZoneTexte : public sf::RectangleShape {
 		std::string getTexte() const;
 		void setTexte(char lettre);
 
+		void clear();
+
 		bool isOver(int _x, int _y) const;
 
 		void upgrade(sf::RenderWindow & fenetre);

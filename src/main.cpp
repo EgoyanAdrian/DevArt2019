@@ -99,6 +99,7 @@ int main() {
                     if((zText1.getClicked()) && (lettre != '\n') && (!zText1.isFull()) && (!zText2.isFull())) {
                         zText1.setTexte(lettre);
                         motBinaire = convertirTaB(zText1.getTexte());
+                        zText2.clear();
                         for(char & caractere : motBinaire) {
                             zText2.setTexte(caractere);
                         }
