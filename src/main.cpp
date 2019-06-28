@@ -29,7 +29,7 @@ int main() {
     bool Binaire2=false;
 
 
-    std::string messagePays="Envoye du fichier en "+pays+"\n";
+    std::string messagePays;
     std::string ipadressdapart;
     std::string ipAdressArriver;
     std::string messagefichierenvo="Fichier bien envoyer \n";
@@ -43,7 +43,7 @@ int main() {
     }
 
     ZoneTexte cmd(0,0,0,0,font);
-    //cmd.setLimitless(true);
+    cmd.setLimitless(true);
     ZoneTexte zText1(0,0,0,0,font);
     ZoneTexte zText2(0,0,0,0,font);
 
@@ -120,7 +120,7 @@ int main() {
             for(char & caractere : messagefichierenvo) {
                 cmd.setTexte(caractere);
             }
-        
+            messagePays="Envoye du fichier en "+pays+"\n";
             for(char & caractere : messagePays) {
                 cmd.setTexte(caractere);
             }
@@ -138,6 +138,10 @@ int main() {
         }
         cmd.upgrade(window);
         window.draw(cmd);
+        zText1.upgrade(window);
+        zText2.upgrade(window);
+        window.draw(zText1);
+        window.draw(zText2);
 
         window.display();
     }

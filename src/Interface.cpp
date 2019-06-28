@@ -15,19 +15,17 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
     // 1er fenetre de visionage
     uint R1x=250.f+DiffX;
     uint R1y=550.f+diffY;
-	sf::RectangleShape Rectangle1(sf::Vector2f(R1x,R1y));
-    Rectangle1.setOutlineColor(sf::Color::Black);
-    Rectangle1.setOutlineThickness(3);
-	Rectangle1.setPosition(10, 20);
 
-	//dexieme feneter de visionage
+	ZT1.setSize(sf::Vector2f(R1x,R1y));
+    ZT1.setPosition(10, 20);
+
+    //dexieme feneter de visionage
     uint R2x=250.f+DiffX;
     uint R2y=550.f+diffY;
 
-	sf::RectangleShape Rectangle2(sf::Vector2f(R2x,R2y));
-    Rectangle2.setOutlineColor(sf::Color::Black);
-    Rectangle2.setOutlineThickness(3);
-	Rectangle2.setPosition(10+R1x+30, 20);
+    ZT2.setSize(sf::Vector2f(R2x,R2y));
+    ZT2.setPosition(10+R1x+30, 20);
+
 
     uint RBEx=82;
     uint RBEy=30;
@@ -38,8 +36,8 @@ void Interface(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &E
 
 
 	//affiche les deux fenetres
-   w.draw(Rectangle1);
-    w.draw(Rectangle2);
+
+
 
     //affichage du CMD
     uint Rpx=220+DiffX;
@@ -86,20 +84,16 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     // 1er fenetre de visionage
     uint R1x=250.f+DiffX;
     uint R1y=500.f+diffY;
-    sf::RectangleShape Rectangle1(sf::Vector2f(R1x,R1y));
-    Rectangle1.setOutlineColor(sf::Color::Black);
-    Rectangle1.setOutlineThickness(3);
-    Rectangle1.setPosition(10, 20);
+    ZT1.setSize(sf::Vector2f(R1x,R1y));
+    ZT1.setPosition(10, 20);
 
     //dexieme feneter de visionage
     uint R2x=250.f+DiffX;
     uint R2y=500.f+diffY;
 
-    sf::RectangleShape Rectangle2(sf::Vector2f(R2x,R2y));
-    Rectangle2.setOutlineColor(sf::Color::Black);
-    Rectangle2.setOutlineThickness(3);
-    Rectangle2.setPosition(10+R1x+30, 20);
-    
+
+    ZT2.setSize(sf::Vector2f(R2x,R2y));
+    ZT2.setPosition(10+R1x+30, 20);
     //bouton envoyer
     uint RBEx=82;
     uint RBEy=30;
@@ -172,9 +166,6 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
         //affichage de la console
 
 
-    //affiche les deux fenetres
-    w.draw(Rectangle1);
-    w.draw(Rectangle2);
 
     //affichage du CMD
     uint Rpx=220+DiffX;
@@ -189,7 +180,6 @@ void Interface2(sf::RenderWindow &w,uint mouse_X,uint mouse_Y,bool isPush,bool &
     if(isPush){
         BoutonEnvoyer.setClicked(BoutonEnvoyer.isOver(mouse_X, mouse_Y));
             if(BoutonEnvoyer.getClicked()){
-                std::cout<<"ok"<<std::endl;
                 EnvoyerisFisrtPush=true;
                 pays=genererNomPays();
                 EnvoyerisAcitve=true;
