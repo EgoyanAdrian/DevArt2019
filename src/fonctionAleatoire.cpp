@@ -73,11 +73,7 @@ std::string corruption(std::string _texte) {
 			texteTempo = texteTempo;
 		else
 			texteTempo += caractere;
-
-		std::cout << val;
 	}
 
-	std::cout << std::endl;
-	std::cout << texteTempo << std::endl;
 	return texteTempo;
 }
